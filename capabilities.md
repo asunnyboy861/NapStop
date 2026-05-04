@@ -46,5 +46,5 @@ Based on operation guide analysis:
 | UISupportsIndirectInputEvents | YES |
 
 ## Verification
-- Build succeeded after configuration: Pending
-- All entitlements correct: Pending
+- Build succeeded after configuration: ✅
+- All entitlements correct: ✅
