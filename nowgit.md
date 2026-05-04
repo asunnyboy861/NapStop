@@ -15,9 +15,9 @@
 
 | Page | URL | Status |
 |------|-----|--------|
-| Landing Page | https://asunnyboy861.github.io/NapStop/ | ⏳ Pending |
-| Support | https://asunnyboy861.github.io/NapStop/support.html | ⏳ Pending |
-| Privacy Policy | https://asunnyboy861.github.io/NapStop/privacy.html | ⏳ Pending |
+| Landing Page | https://asunnyboy861.github.io/NapStop/ | ✅ Active |
+| Support | https://asunnyboy861.github.io/NapStop/support.html | ✅ Active |
+| Privacy Policy | https://asunnyboy861.github.io/NapStop/privacy.html | ✅ Active |
 
 **Note**: Terms of Use not required for Paid Download apps.
 
