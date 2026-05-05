@@ -12,6 +12,9 @@ struct NapStopApp: App {
            let tab = Int(args[idx + 1]) {
             _selectedTab = State(initialValue: tab)
         }
+        if args.contains("--show-search") {
+            _showSearch = State(initialValue: true)
+        }
     }
 
     var body: some Scene {
