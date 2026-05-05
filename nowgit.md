@@ -10,6 +10,9 @@
 | **Visibility** | Public |
 | **Primary Language** | Swift |
 | **GitHub Pages** | ✅ **ENABLED** (from `/docs` folder) |
+| **Bundle ID** | com.zzoutuo.NapStop |
+| **Deployment Target** | iOS 17.0 |
+| **Architecture** | MVVM + @Observable |
 
 ## Policy Pages (Deployed from Main Repository /docs)
 
@@ -21,20 +24,60 @@
 
 **Note**: Terms of Use not required for Paid Download apps.
 
+## GitHub Actions Workflows
+
+| Workflow | File | Trigger | Status |
+|----------|------|---------|--------|
+| Deploy to GitHub Pages | `.github/workflows/deploy.yml` | Push to main | ✅ Active |
+
+## Build Verification
+
+| Platform | Device | Status |
+|----------|--------|--------|
+| iOS Simulator | iPhone XS Max | ✅ Build Succeeded |
+| iOS Simulator | iPad Pro 13-inch (M4) | ✅ Build Succeeded |
+
 ## Repository Structure
 
-### Main App Repository
 ```
 NapStop/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml              # GitHub Pages deployment workflow
 ├── NapStop/                        # iOS App Source Code
 │   ├── NapStop.xcodeproj/          # Xcode Project
 │   ├── NapStop/                    # Swift Source Files
+│   │   ├── NapStopApp.swift        # App entry point
+│   │   ├── ContentView.swift       # Root content view
 │   │   ├── Views/
-│   │   ├── Models/
-│   │   ├── Services/
+│   │   │   ├── Main/MainTabView.swift
+│   │   │   ├── Alarm/
+│   │   │   │   ├── SetAlarmView.swift
+│   │   │   │   ├── AlarmActiveView.swift
+│   │   │   │   └── AlarmRingingView.swift
+│   │   │   ├── Map/DestinationSearchView.swift
+│   │   │   ├── History/AlarmHistoryView.swift
+│   │   │   └── Settings/
+│   │   │       ├── SettingsView.swift
+│   │   │       └── ContactSupportView.swift
 │   │   ├── ViewModels/
-│   │   └── ...
+│   │   │   ├── AlarmViewModel.swift
+│   │   │   └── MapSearchViewModel.swift
+│   │   ├── Services/
+│   │   │   ├── LocationManager.swift
+│   │   │   ├── AlarmPlayer.swift
+│   │   │   ├── HapticManager.swift
+│   │   │   ├── LiveActivityManager.swift
+│   │   │   ├── NotificationManager.swift
+│   │   │   └── SubwayFallbackManager.swift
+│   │   ├── Models/
+│   │   │   ├── AlarmDestination.swift
+│   │   │   └── AlarmRecord.swift
+│   │   └── Assets.xcassets/
+│   │       └── AppIcon.appiconset/
 │   └── Info.plist
+├── NapStop-pic/                    # App Store Screenshots
+│   └── iphone/
 ├── docs/                           # Policy Pages (GitHub Pages)
 │   ├── index.html
 │   ├── support.html
