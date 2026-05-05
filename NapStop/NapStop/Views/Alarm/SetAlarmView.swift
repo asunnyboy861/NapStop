@@ -7,7 +7,7 @@ struct SetAlarmView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var alarmVM = AlarmViewModel()
     @State private var searchVM = MapSearchViewModel()
-    @State private var showSearch = false
+    @Binding var showSearch: Bool
     @State private var showActiveAlarm = false
     @State private var selectedDestination: AlarmDestination?
     @Query(filter: #Predicate<AlarmDestination> { $0.isFavorite },
@@ -193,6 +193,6 @@ struct FavoriteRow: View {
 }
 
 #Preview {
-    SetAlarmView()
+    SetAlarmView(showSearch: .constant(false))
         .modelContainer(for: [AlarmDestination.self, AlarmRecord.self])
 }

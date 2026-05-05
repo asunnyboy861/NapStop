@@ -2,8 +2,11 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @State private var selectedTab = 0
+    @State private var showSearch = false
+
     var body: some View {
-        MainTabView()
+        MainTabView(selectedTab: $selectedTab, showSearch: $showSearch)
     }
 }
 
