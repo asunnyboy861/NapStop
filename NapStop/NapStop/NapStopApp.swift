@@ -6,6 +6,14 @@ struct NapStopApp: App {
     @State private var selectedTab = 0
     @State private var showSearch = false
 
+    init() {
+        let args = ProcessInfo.processInfo.arguments
+        if let idx = args.firstIndex(of: "--screenshot-tab"), idx + 1 < args.count,
+           let tab = Int(args[idx + 1]) {
+            _selectedTab = State(initialValue: tab)
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             MainTabView(selectedTab: $selectedTab, showSearch: $showSearch)

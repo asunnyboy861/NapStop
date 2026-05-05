@@ -34,7 +34,7 @@
 			<string>com.zzoutuo.NapStop</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>nappstop</string>
+				<string>napstop</string>
 			</array>
 		</dict>
 	</array>
