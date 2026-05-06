@@ -1,4 +1,5 @@
 import AVFoundation
+import UIKit
 
 final class AlarmPlayer {
     static let shared = AlarmPlayer()
@@ -7,6 +8,10 @@ final class AlarmPlayer {
     private init() {}
 
     func playAlarm(soundName: String = "alarm") {
+        guard UIApplication.shared.applicationState == .active else {
+            return
+        }
+
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setCategory(.playback, options: .mixWithOthers)

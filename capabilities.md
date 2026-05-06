@@ -4,8 +4,8 @@
 Based on operation guide analysis:
 - GPS location tracking and geofencing (core feature)
 - Background location updates (alarm must work while app is in background)
-- Audio playback for alarm sound (must bypass silent mode)
-- Local notifications (backup alarm)
+- Critical Alert notifications for alarm sound (bypasses silent mode, no audio background mode needed)
+- Local notifications with critical sound for background alerts
 - MapKit for destination selection
 - CoreMotion for subway/tunnel fallback
 - ActivityKit for Live Activities
@@ -17,7 +17,7 @@ Based on operation guide analysis:
 |------------|--------|--------|
 | Location Services (Always + When In Use) | ✅ Configured | Info.plist keys |
 | Background Modes - Location Updates | ✅ Configured | Info.plist |
-| Background Modes - Audio | ✅ Configured | Info.plist |
+| Background Modes - Audio | ❌ Removed | Not needed - using Critical Alert notifications |
 | MapKit | ✅ Available | Framework (no capability needed) |
 | CoreMotion | ✅ Available | Framework (no capability needed) |
 | UserNotifications | ✅ Available | Framework (no capability needed) |
@@ -42,7 +42,7 @@ Based on operation guide analysis:
 |-----|-------|
 | NSLocationAlwaysAndWhenInUseUsageDescription | "NapStop needs your location to alert you when approaching your destination, even when you're sleeping." |
 | NSLocationWhenInUseUsageDescription | "NapStop needs your location to set up your destination alarm." |
-| UIBackgroundModes | ["location", "audio"] |
+| UIBackgroundModes | ["location"] |
 | UISupportsIndirectInputEvents | YES |
 
 ## Verification
