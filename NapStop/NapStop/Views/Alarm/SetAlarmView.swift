@@ -10,6 +10,7 @@ struct SetAlarmView: View {
     @Binding var showSearch: Bool
     @State private var showActiveAlarm = false
     @State private var selectedDestination: AlarmDestination?
+    @State private var showLocationDeniedAlert = false
     @Query(filter: #Predicate<AlarmDestination> { $0.isFavorite },
            sort: \AlarmDestination.createdAt) private var favorites: [AlarmDestination]
 
@@ -55,6 +56,16 @@ struct SetAlarmView: View {
                 if newState == .ringing || newState == .overshoot {
                     showActiveAlarm = true
                 }
+            }
+            .alert("Location Access Required", isPresented: $showLocationDeniedAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Open Settings") {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            } message: {
+                Text("NapStop needs location access to monitor your destination and alert you when you arrive. Please enable location access in Settings.")
             }
         }
     }
@@ -126,18 +137,17 @@ struct SetAlarmView: View {
                     .foregroundStyle(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
             }
-
-            Button {
-                alarmVM.requestLocationPermission()
-            } label: {
-                Label("Enable Location", systemImage: "location.fill")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
         }
     }
 
     private func startAlarm(destination: AlarmDestination) {
+        let status = alarmVM.locationAuthorizationStatus
+
+        if status == .denied || status == .restricted {
+            showLocationDeniedAlert = true
+            return
+        }
+
         let record = AlarmRecord(
             destinationName: destination.name,
             destinationLatitude: destination.latitude,
@@ -147,6 +157,11 @@ struct SetAlarmView: View {
         )
         modelContext.insert(record)
         alarmVM.startAlarm(destination: destination)
+
+        if alarmVM.errorMessage != nil {
+            showLocationDeniedAlert = true
+            alarmVM.errorMessage = nil
+        }
     }
 
     private func formatAddress(_ mapItem: MKMapItem) -> String {

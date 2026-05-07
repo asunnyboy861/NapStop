@@ -34,6 +34,10 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.requestAlwaysAuthorization()
     }
 
+    func checkAuthorizationStatus() -> CLAuthorizationStatus {
+        return manager.authorizationStatus
+    }
+
     func startMonitoring(destination: CLLocationCoordinate2D, arrivalRadius: Double, approachRadius: Double) {
         self.destination = destination
         self.previousDistance = nil

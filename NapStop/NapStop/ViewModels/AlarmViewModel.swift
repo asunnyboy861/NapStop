@@ -44,7 +44,22 @@ final class AlarmViewModel {
         locationManager.requestPermission()
     }
 
+    var locationAuthorizationStatus: CLAuthorizationStatus {
+        locationManager.authorizationStatus
+    }
+
     func startAlarm(destination: AlarmDestination) {
+        let status = locationManager.authorizationStatus
+
+        if status == .notDetermined {
+            locationManager.requestPermission()
+        }
+
+        guard status == .authorizedAlways || status == .authorizedWhenInUse else {
+            errorMessage = "Location access is required to monitor your destination. Please enable location access in Settings."
+            return
+        }
+
         destinationName = destination.name
         approachRadius = destination.approachRadius
         arrivalRadius = destination.arrivalRadius
